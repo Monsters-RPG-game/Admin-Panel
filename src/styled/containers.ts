@@ -27,21 +27,6 @@ export const ContainerBody = styled(Container)<IContainerProps>`
   background: ${(props): string => props.theme.background.default};
   color: ${(props): string => props.theme.colors.default};
   transition: ${(props): string => props.theme.transition.semiSlow};
-
-  &::-webkit-scrollbar {
-    width: 15px;
-    border-radius: 50px;
-    background: ${(props): string => props.theme.background.opposite};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${(props): string => props.theme.colors.purple};
-    border-radius: 50px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 `;
 
 export const App = styled(motion.div)`

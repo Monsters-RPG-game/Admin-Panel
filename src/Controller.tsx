@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { DefaultTheme } from 'styled-components';
 import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Cookies from './tools/cookies';
 import { EThemes, ETokenNames } from './enums';
-import { App, Container, ContainerBody } from './components/containers';
 import AppRouter from './router';
 import * as themes from './style/theme';
-import { Navbar } from './components/navbar';
-import { Button } from './components';
+import Loading from './components/Loader';
+import { App, Button, ContainerBody, Link, Navbar, NavIcon } from './styled';
 import { useAccountStore } from './zustand/store';
 import { handleLogin, loginUser, sendToLoginPage } from './controllers/account';
 
@@ -24,14 +23,17 @@ const StaticHandlers: React.FC<{
 
   return (
     <Navbar>
-      <Button type="button" onClick={() => changeTheme(setTheme, theme)}>
-        <i className="icon-cog" />
-      </Button>
+      <Link to="/">Home</Link>
+      <span>
+        <Link to="/npc">Npc</Link>
+      </span>
+      <NavIcon onClick={() => changeTheme(setTheme, theme)} className="icon-cog" />
     </Navbar>
   );
 };
 
 const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>> }> = ({ setTheme }) => {
+  const [ready, setReady] = useState<boolean>(false);
   const account = useAccountStore((state) => state.account);
   const navigate = useNavigate();
 
@@ -42,9 +44,11 @@ const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     const accessToken = new Cookies().getToken(ETokenNames.Access);
     if (accessToken) {
-      loginUser().catch(() => {
-        // ignored
-      });
+      loginUser()
+        .then((): void => setReady(true))
+        .catch(() => {
+          setReady(true);
+        });
     }
   }, []);
 
@@ -55,13 +59,21 @@ const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<
 
     if (code) {
       handleLogin(code)
-        .then(() => navigate('/'))
+        .then((): void => {
+          setReady(true);
+          return navigate('/');
+        })
         .catch((err) => {
+          setReady(true);
           navigate('/');
           console.log('Got err while logging in', err);
         });
     }
-  }, []);
+  }, [navigate]);
+
+  if (!ready) {
+    return <Loading />;
+  }
 
   return (
     <App>
@@ -71,17 +83,15 @@ const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<
           <AppRouter />
         </>
       ) : (
-        <Container>
-          <ContainerBody>
-            <Button
-              onClick={() => {
-                sendToLoginPage().catch((err) => console.log('Could not send to login page', err));
-              }}
-            >
-              <h4>Log in</h4>
-            </Button>
-          </ContainerBody>
-        </Container>
+        <ContainerBody>
+          <Button
+            onClick={() => {
+              sendToLoginPage().catch((err) => console.log('Could not send to login page', err));
+            }}
+          >
+            <h4>Log in</h4>
+          </Button>
+        </ContainerBody>
       )}
     </App>
   );
