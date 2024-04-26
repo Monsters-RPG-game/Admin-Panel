@@ -49,6 +49,8 @@ const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<
         .catch(() => {
           setReady(true);
         });
+    } else {
+      setReady(true);
     }
   }, []);
 
@@ -58,14 +60,14 @@ const ViewsController: React.FC<{ setTheme: React.Dispatch<React.SetStateAction<
     const code = params.get('code');
 
     if (code) {
+      navigate('/');
+
       handleLogin(code)
         .then((): void => {
-          setReady(true);
-          return navigate('/');
+          return setReady(true);
         })
         .catch((err) => {
           setReady(true);
-          navigate('/');
           console.log('Got err while logging in', err);
         });
     }

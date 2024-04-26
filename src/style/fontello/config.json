@@ -13,15 +13,21 @@
       "src": "fontawesome"
     },
     {
+      "uid": "c82f1ec71a2c9e5af8b00fe5fe27f57e",
+      "css": "hand-grab-o",
+      "code": 62037,
+      "src": "fontawesome"
+    },
+    {
       "uid": "44a0e2660ac966cdfaa04deb6aac51df",
       "css": "shield",
       "code": 61746,
       "src": "fontawesome"
     },
     {
-      "uid": "c82f1ec71a2c9e5af8b00fe5fe27f57e",
-      "css": "hand-grab-o",
-      "code": 62037,
+      "uid": "d35a1d35efeb784d1dc9ac18b9b6c2b6",
+      "css": "pencil",
+      "code": 59393,
       "src": "fontawesome"
     }
   ]

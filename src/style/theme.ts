@@ -32,6 +32,7 @@ export const lightTheme: DefaultTheme = {
   },
   background: {
     default: 'rgb(255,255,255)',
+    semiTransparent: 'rgba(255,255,255, 0.95)',
     opposite: 'rgb(95, 95, 95)',
   },
   themeState: enums.EThemes.Light,
@@ -47,6 +48,7 @@ export const darkTheme: DefaultTheme = {
   },
   background: {
     default: 'rgb(95, 95, 95)',
+    semiTransparent: 'rgba(95, 95, 95, 0.95)',
     opposite: 'rgb(255,255,255)',
   },
   themeState: enums.EThemes.Dark,

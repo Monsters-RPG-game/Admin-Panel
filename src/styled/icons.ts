@@ -25,3 +25,21 @@ export const LoadingCircle = styled(motion.div)`
     animation: ${rotate} 2s linear infinite;
   }
 `;
+
+export const ExitIcon = styled(motion.header)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: lighter;
+  letter-spacing: 0.9px;
+  color: red !important;
+  padding: 0.5rem;
+  margin: 0;
+  color: ${(props): string => props.theme.colors.default};
+
+  &:hover {
+    cursor: pointer;
+  }
+}`;

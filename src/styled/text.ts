@@ -4,10 +4,6 @@ import { Link as ReactLink } from 'react-router-dom';
 
 export const Icon = styled(motion.i)`
   font-size: 1.5rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export const NavIcon = styled(Icon)`

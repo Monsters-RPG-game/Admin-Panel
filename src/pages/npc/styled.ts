@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import type { IContainerProps } from '../../types';
-import { Container, ContainerBody } from '../../styled';
+import { Container, ContainerBody, Icon } from '../../styled';
 
 export const NpcContainer = styled(Container)<IContainerProps>`
   padding-top: 75px;
@@ -24,6 +24,7 @@ export const NpcInnerContainer = styled(ContainerBody)<IContainerProps>`
 `;
 
 export const NpcCard = styled(motion.div)`
+  position: relative;
   width: 200px;
   height: 300px;
   display: flex;
@@ -36,4 +37,28 @@ export const NpcCard = styled(motion.div)`
   border-bottom-right-radius: 5%;
   box-shadow: 0 1px 2px ${(props): string => props.theme.shadows.black};
   margin: 15px;
+`;
+
+export const EditIcon = styled(Icon)`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+export const RemoveIcon = styled(motion.header)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: lighter;
+  letter-spacing: 0.9px;
+  color: red !important;
+  padding: 0 0 0 0.25em;
+  margin: 0;
+  color: ${(props): string => props.theme.colors.default};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

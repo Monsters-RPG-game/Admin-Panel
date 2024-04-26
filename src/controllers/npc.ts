@@ -1,5 +1,88 @@
 import type { IFullError } from '../types';
-import type { INpc } from '../types/npc';
+import type { IAddNpc, INpc, IUpdateNpc } from '../types/npc';
+import Cookies from '../tools/cookies';
+import { ETokenNames } from '../enums';
+
+export const removeNpc = async (id: string): Promise<void> => {
+  const accessToken = new Cookies().getToken(ETokenNames.Access);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const server = import.meta.env.VITE_API_BACKEND as string;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const home = import.meta.env.VITE_API_HOME as string;
+
+  // eslint-disable-next-line compat/compat
+  const res = await fetch(`${server}/npc`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': home,
+    },
+    body: JSON.stringify({ id }),
+  });
+  if (res.ok) {
+    return;
+  }
+  const err = (await res.json()) as IFullError;
+  throw err;
+};
+
+export const addNpc = async (body: IAddNpc): Promise<void> => {
+  const accessToken = new Cookies().getToken(ETokenNames.Access);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const server = import.meta.env.VITE_API_BACKEND as string;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const home = import.meta.env.VITE_API_HOME as string;
+
+  // eslint-disable-next-line compat/compat
+  const res = await fetch(`${server}/npc`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': home,
+    },
+    body: JSON.stringify(body),
+  });
+  if (res.ok) {
+    return;
+  }
+  const err = (await res.json()) as IFullError;
+  throw err;
+};
+
+export const editNpc = async (body: IUpdateNpc): Promise<void> => {
+  const accessToken = new Cookies().getToken(ETokenNames.Access);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const server = import.meta.env.VITE_API_BACKEND as string;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const home = import.meta.env.VITE_API_HOME as string;
+
+  // eslint-disable-next-line compat/compat
+  const res = await fetch(`${server}/npc`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': home,
+    },
+    body: JSON.stringify(body),
+  });
+  if (res.ok) {
+    return;
+  }
+  const err = (await res.json()) as IFullError;
+  throw err;
+};
 
 export const getNpcs = async (page: number): Promise<{ data: INpc[] }> => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -11,7 +11,9 @@ export const useNpcStore = create<types.INpcStore>((set) => ({
   replace: (npcs): void => set({ npc: npcs }),
   add: (npcs): void => {
     set((base) => {
-      return { npc: [...base.npc, ...npcs] };
+      const newIds = npcs.map((n) => n._id);
+      const filtered = base.npc.filter((e) => !newIds.includes(e._id));
+      return { npc: [...filtered, ...npcs] };
     });
   },
   update: (npc, id): void => {
