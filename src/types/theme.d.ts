@@ -13,6 +13,7 @@ declare module 'styled-components' {
     };
     background: {
       default: string;
+      semiTransparent: string;
       opposite: string;
     };
     fontSizes: {

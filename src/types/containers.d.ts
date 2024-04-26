@@ -5,3 +5,8 @@ export interface IContainerProps {
   $wrap?: string;
   $noScroll?: boolean;
 }
+
+export interface IInputProps {
+  $full?: boolean;
+  $centerText?: boolean;
+}

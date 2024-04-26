@@ -27,21 +27,6 @@ export const ContainerBody = styled(Container)<IContainerProps>`
   background: ${(props): string => props.theme.background.default};
   color: ${(props): string => props.theme.colors.default};
   transition: ${(props): string => props.theme.transition.semiSlow};
-
-  &::-webkit-scrollbar {
-    width: 15px;
-    border-radius: 50px;
-    background: ${(props): string => props.theme.background.opposite};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${(props): string => props.theme.colors.purple};
-    border-radius: 50px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 `;
 
 export const App = styled(motion.div)`
@@ -49,4 +34,57 @@ export const App = styled(motion.div)`
   color: ${(props): string => props.theme.colors.default};
   transition: ${(props): string => props.theme.transition.slow};
   width: 100%;
+`;
+
+export const OverlayContainer = styled(Container)`
+  width: 100%;
+  height: 100vh;
+  background: rgba(100, 100, 100, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 7;
+
+  @media (min-width: 768px) {
+    align-items: center;
+  }
+
+  @media (max-width: 767px) {
+    align-items: flex-start;
+  }
+`;
+
+export const OverlayContainerBody = styled('div')`
+  position: relative;
+  border-left: 1px solid grey;
+  background: ${(props): string => props.theme.background.semiTransparent};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  transition: ${(props): string => props.theme.transition.semiSlow};
+
+  * {
+    margin: 10px auto;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 300px;
+    height: fit-content;
+    width: 500px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 767px) {
+    height: 100%;
+    width: 100%;
+  }
 `;

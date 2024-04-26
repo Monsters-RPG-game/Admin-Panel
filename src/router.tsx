@@ -8,6 +8,7 @@ const Routers: React.FC = () => {
     <AnimatePresence mode="wait">
       <Routes>
         <Route path="/" element={<pages.Home />} />
+        <Route path="/npc" element={<pages.Npc />} />
         <Route path="*" element={<pages.FourOhFour />} />
       </Routes>
     </AnimatePresence>
